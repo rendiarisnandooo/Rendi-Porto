@@ -34,7 +34,6 @@ class PortfolioApp {
     private setupEventListeners(): void {
         // Navigation
         const hamburger = document.querySelector('.hamburger') as HTMLElement;
-        const navMenu = document.querySelector('.nav-menu') as HTMLElement;
         const navLinks = document.querySelectorAll('.nav-link');
 
         hamburger?.addEventListener('click', () => this.toggleMobileMenu());
@@ -294,6 +293,7 @@ class PortfolioApp {
         };
 
         // Simulate form submission
+        console.log('Form data:', contactData); // Log the form data for debugging
         this.showNotification('Pesan berhasil dikirim! Terima kasih atas pesan Anda.', 'success');
         form.reset();
     }
@@ -382,8 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const ripple = document.createElement('span');
             const rect = (e.target as HTMLElement).getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
+            const mouseEvent = e as MouseEvent;
+            const x = mouseEvent.clientX - rect.left - size / 2;
+            const y = mouseEvent.clientY - rect.top - size / 2;
 
             ripple.style.cssText = `
                 position: absolute;
